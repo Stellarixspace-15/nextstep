@@ -1,3 +1,4 @@
+import { noindex } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { Eye, EyeOff, UserPlus } from "lucide-react";
@@ -5,7 +6,8 @@ import { AdminGate } from "@/components/AdminGate";
 import { supabase } from "@/integrations/supabase/client";
 import { createStaffLogin } from "@/lib/staff.functions";
 
-export const Route = createFileRoute("/admin/staff")({ component: Page });
+export const Route = createFileRoute("/admin/staff")({
+  head: noindex, component: Page });
 
 type StaffMember = {
   user_id: string;

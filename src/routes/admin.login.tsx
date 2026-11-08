@@ -1,9 +1,11 @@
+import { noindex } from "@/lib/seo";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { ArrowLeft, Eye, EyeOff, LockKeyhole, ShieldCheck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { clearAdminState, getAdminState, needsOnboarding } from "@/lib/admin-auth";
-export const Route = createFileRoute("/admin/login")({ component: AdminLogin });
+export const Route = createFileRoute("/admin/login")({
+  head: noindex, component: AdminLogin });
 function AdminLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");

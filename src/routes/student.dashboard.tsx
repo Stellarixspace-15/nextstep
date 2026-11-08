@@ -1,10 +1,12 @@
+import { noindex } from "@/lib/seo";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { StudentWorkspace } from "@/components/StudentWorkspace";
 import { supabase } from "@/integrations/supabase/client";
 import { BookOpen, Building2, Compass, LogOut } from "lucide-react";
-export const Route = createFileRoute("/student/dashboard")({ component: Page });
+export const Route = createFileRoute("/student/dashboard")({
+  head: noindex, component: Page });
 function Page() {
   const go = useNavigate();
   const [name, setName] = useState("Student");

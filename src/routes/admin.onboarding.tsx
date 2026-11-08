@@ -1,10 +1,12 @@
+import { noindex } from "@/lib/seo";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { CheckCircle2, ShieldCheck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { clearAdminState, getAdminState, needsOnboarding } from "@/lib/admin-auth";
 import { AdminShell } from "@/components/AdminShell";
-export const Route = createFileRoute("/admin/onboarding")({ component: AdminOnboarding });
+export const Route = createFileRoute("/admin/onboarding")({
+  head: noindex, component: AdminOnboarding });
 function AdminOnboarding() {
   const navigate = useNavigate();
   const [checking, setChecking] = useState(true);

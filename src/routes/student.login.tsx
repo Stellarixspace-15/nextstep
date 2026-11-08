@@ -1,8 +1,10 @@
+import { noindex } from "@/lib/seo";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
-export const Route = createFileRoute("/student/login")({ component: Page });
+export const Route = createFileRoute("/student/login")({
+  head: noindex, component: Page });
 function Page() {
   const go = useNavigate();
   const [mode, setMode] = useState<"login" | "register">("login");

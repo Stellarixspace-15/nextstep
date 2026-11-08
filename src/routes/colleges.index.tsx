@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { MapPin, Search, Building2, IndianRupee, BookOpen, SlidersHorizontal } from "lucide-react";
@@ -14,7 +15,15 @@ import {
   type CollegeCourse,
   type CourseSummary,
 } from "@/lib/college-data";
-export const Route = createFileRoute("/colleges/")({ component: Colleges });
+export const Route = createFileRoute("/colleges/")({
+  head: () =>
+    seo(
+      "/colleges",
+      "Colleges in India – Fees, Courses & Compare | NextStep",
+      "Search and compare colleges across India by fees, courses, district and type. Find the right college for your next step with NextStep.",
+    ),
+  component: Colleges,
+});
 type Row = College & { courses: CollegeCourse[]; summary: CourseSummary };
 const ALL = "all";
 const FEE_CAPS = [50000, 100000, 200000, 500000];

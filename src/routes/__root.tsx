@@ -86,6 +86,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "Explore careers, courses, colleges, and your next steps with NextStep.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "NextStep" },
+      { property: "og:locale", content: "en_IN" },
+      { property: "og:image", content: "https://www.nextstepinfo.in/favicon.png" },
+      { name: "theme-color", content: "#0f2a4a" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
@@ -110,7 +114,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <head>
         <HeadContent />
       </head>

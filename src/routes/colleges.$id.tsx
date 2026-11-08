@@ -1,3 +1,4 @@
+import { seo, SITE_URL } from "@/lib/seo";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
@@ -24,7 +25,36 @@ import {
   type College,
   type CollegeCourse,
 } from "@/lib/college-data";
-export const Route = createFileRoute("/colleges/$id")({ component: Detail });
+export const Route = createFileRoute("/colleges/$id")({
+  loader: async ({ params }) =>
+    (await getColleges().catch(() => [])).find((c) => c.id === params.id) ?? null,
+  head: ({ params, loaderData: c }) => {
+    if (!c) return seo(`/colleges/${params.id}`, "College details | NextStep", "College fees, courses and admissions on NextStep.");
+    const place = [c.district, c.state].filter(Boolean).join(", ");
+    const page = seo(
+      `/colleges/${c.id}`,
+      `${c.name}, ${place} – Courses, Fees & Admission | NextStep`,
+      (c.description || `${c.name} in ${place}: courses, fees and admission details.`).slice(0, 160),
+    );
+    return {
+      ...page,
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollegeOrUniversity",
+            name: c.name,
+            url: `${SITE_URL}/colleges/${c.id}`,
+            address: { "@type": "PostalAddress", streetAddress: c.address ?? undefined, addressLocality: c.district, addressRegion: c.state, addressCountry: "IN" },
+            ...(c.image_url ? { image: c.image_url } : {}),
+          }),
+        },
+      ],
+    };
+  },
+  component: Detail,
+});
 const TABS = ["Overview", "Courses & Fees", "Admissions"] as const;
 type Tab = (typeof TABS)[number];
 const inr = (n: number | null) => (n == null ? "—" : `₹${Number(n).toLocaleString("en-IN")}`);

@@ -1,10 +1,12 @@
+import { noindex } from "@/lib/seo";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { GraduationCap, Users } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { normalizePhone } from "@/lib/student-profile";
-export const Route = createFileRoute("/student/details")({ component: Page });
+export const Route = createFileRoute("/student/details")({
+  head: noindex, component: Page });
 function Page() {
   const go = useNavigate();
   const [userId, setUserId] = useState("");

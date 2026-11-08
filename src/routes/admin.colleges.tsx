@@ -1,3 +1,4 @@
+import { noindex } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { Plus, Edit2, Trash2, ImagePlus, Save, X, Building2, BookOpen } from "lucide-react";
@@ -11,7 +12,8 @@ import {
   type College,
   type CollegeCourse,
 } from "@/lib/college-data";
-export const Route = createFileRoute("/admin/colleges")({ component: Page });
+export const Route = createFileRoute("/admin/colleges")({
+  head: noindex, component: Page });
 const blank = {
   name: "",
   district: "",

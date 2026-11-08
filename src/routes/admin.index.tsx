@@ -1,10 +1,12 @@
+import { noindex } from "@/lib/seo";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { BookOpen, Building2, BriefcaseBusiness, ClipboardList, Users, Bell } from "lucide-react";
 import { getAdminState, needsOnboarding } from "@/lib/admin-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { AdminShell } from "@/components/AdminShell";
-export const Route = createFileRoute("/admin/")({ component: Dashboard });
+export const Route = createFileRoute("/admin/")({
+  head: noindex, component: Dashboard });
 type Metric = { title: string; value: number | null; icon: typeof Users };
 function Dashboard() {
   const navigate = useNavigate();

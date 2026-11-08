@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowLeft, Building2, X } from "lucide-react";
@@ -11,7 +12,11 @@ import {
   type College,
   type CollegeCourse,
 } from "@/lib/college-data";
-export const Route = createFileRoute("/colleges/compare")({ component: Compare });
+export const Route = createFileRoute("/colleges/compare")({
+  head: () =>
+    seo("/colleges/compare", "Compare Colleges Side by Side | NextStep", "Compare colleges side by side on fees, courses and location."),
+  component: Compare,
+});
 function Compare() {
   const compare = useCompare();
   const [colleges, setColleges] = useState<College[]>([]);

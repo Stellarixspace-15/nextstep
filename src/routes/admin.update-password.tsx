@@ -1,7 +1,9 @@
+import { noindex } from "@/lib/seo";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
-export const Route = createFileRoute("/admin/update-password")({ component: UpdatePassword });
+export const Route = createFileRoute("/admin/update-password")({
+  head: noindex, component: UpdatePassword });
 function UpdatePassword() {
   const navigate = useNavigate();
   const [password, setPassword] = useState("");

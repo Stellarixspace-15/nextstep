@@ -1,7 +1,9 @@
+import { noindex } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
-export const Route = createFileRoute("/admin/reset-password")({ component: Reset });
+export const Route = createFileRoute("/admin/reset-password")({
+  head: noindex, component: Reset });
 function Reset() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);

@@ -1,9 +1,18 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { BookOpen, Search } from "lucide-react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { getColleges, getCollegeCourses, type CollegeCourse } from "@/lib/college-data";
-export const Route = createFileRoute("/courses/")({ component: Courses });
+export const Route = createFileRoute("/courses/")({
+  head: () =>
+    seo(
+      "/courses",
+      "Courses After 12th – UG, PG & Diploma | NextStep",
+      "Explore UG, PG, diploma and certificate courses after 12th, with the colleges that offer them and their fees.",
+    ),
+  component: Courses,
+});
 type CourseGroup = {
   name: string;
   level: string | null;

@@ -1,3 +1,4 @@
+import { seo, SITE_URL } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Compass, GraduationCap, MapPin, Sparkles } from "lucide-react";
 
@@ -29,21 +30,22 @@ const steps = ["Discover", "Explore", "Compare", "Plan"];
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: "NextStep — Your Future Starts Here" },
+    ...seo(
+      "/",
+      "NextStep – Find Colleges, Courses & Careers After 12th in India",
+      "NextStep helps students in India explore careers, find courses after 12th, and search, compare and shortlist colleges by fees and location.",
+    ),
+    scripts: [
       {
-        name: "description",
-        content:
-          "Find career ideas, courses, and colleges for your next step after school with NextStep.",
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            { "@type": "Organization", name: "NextStep", url: SITE_URL, logo: `${SITE_URL}/favicon.png` },
+            { "@type": "WebSite", name: "NextStep", url: SITE_URL },
+          ],
+        }),
       },
-      { property: "og:title", content: "NextStep — Your Future Starts Here" },
-      {
-        property: "og:description",
-        content:
-          "Find career ideas, courses, and colleges for your next step after school with NextStep.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,

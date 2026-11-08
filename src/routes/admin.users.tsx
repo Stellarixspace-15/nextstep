@@ -1,3 +1,4 @@
+import { noindex } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Download, Search } from "lucide-react";
@@ -5,7 +6,8 @@ import { AdminGate } from "@/components/AdminGate";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 
-export const Route = createFileRoute("/admin/users")({ component: Page });
+export const Route = createFileRoute("/admin/users")({
+  head: noindex, component: Page });
 
 type UserRow = Database["public"]["Functions"]["list_nextstep_users"]["Returns"][number];
 const date = (s: string | null) =>

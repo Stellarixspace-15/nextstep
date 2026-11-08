@@ -1,3 +1,4 @@
+import { noindex } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -30,7 +31,8 @@ import {
 } from "@/lib/next-step";
 import { emptyPlan, loadPlan, savePlan } from "@/lib/plan-store";
 import { addChecklistItems } from "@/lib/checklist";
-export const Route = createFileRoute("/student/assessment")({ component: Page });
+export const Route = createFileRoute("/student/assessment")({
+  head: noindex, component: Page });
 const STEPS = ["Interests", "Background", "Preferences", "Your plan"];
 const LEVELS = ["UG", "PG", "Diploma", "Certificate", "Doctorate"];
 const BUDGETS = [50000, 100000, 200000, 300000, 500000];
